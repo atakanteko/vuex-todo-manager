@@ -1,12 +1,17 @@
 <template>
   <div id="app">
-   
+   <Todos/>
   </div>
 </template>
 
 <script>
-export default {
+import Todos from './components/Todos.vue'
 
+export default {
+  name:'app',
+  components:{
+    Todos
+  },
   data () {
     return {
       
