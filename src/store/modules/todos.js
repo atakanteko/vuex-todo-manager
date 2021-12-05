@@ -8,6 +8,9 @@ const state = {
 const getters = {
     allTodos: state => {
         return state.todos
+    },
+    getCurrentNumberOfTodos: state => {
+        return state.todos.length
     }
 };
 

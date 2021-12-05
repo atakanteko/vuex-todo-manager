@@ -13,12 +13,12 @@
       <option value="10">10</option>
       <option value="5">5</option>
     </select>
-    <button class="toggleBtn" v-if="$store.state.isComplete">Show incompleted todos</button>
+    Number of todos:{{ getCurrentNumberOfTodos }}
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "FilterTodos",
   data(){
@@ -26,6 +26,9 @@ export default {
         select:'',
         isCompleted:true
       }
+  },
+  computed:{
+    ...mapGetters(['getCurrentNumberOfTodos'])
   },
   methods: mapActions(["filterTodos","toggleTodos"])
 };
