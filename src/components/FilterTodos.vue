@@ -1,6 +1,6 @@
 <template>
     <div>
-    Filter Todos:
+    Filter Todos: 
     <select 
         @change="filterTodos(select)" 
         v-model="select" 
@@ -13,6 +13,7 @@
       <option value="10">10</option>
       <option value="5">5</option>
     </select>
+    <button class="toggleBtn" v-if="$store.state.isComplete">Show incompleted todos</button>
   </div>
 </template>
 
@@ -22,10 +23,11 @@ export default {
   name: "FilterTodos",
   data(){
       return{
-        select:''
+        select:'',
+        isCompleted:true
       }
   },
-  methods: mapActions(["filterTodos"])
+  methods: mapActions(["filterTodos","toggleTodos"])
 };
 </script>
 
@@ -34,5 +36,11 @@ select {
   margin-top: 20px;
   padding: 6px;
   border: #41b883 1px solid;
+}
+.toggleBtn{
+    margin-left: 5px;
+    padding: 6px;
+    background-color: #41b883;
+    border-radius: 5px;
 }
 </style>

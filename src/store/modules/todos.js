@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const state = {
-    todos: []
+    todos: [],
+    isComplete:false
 };
 
 const getters = {
@@ -31,6 +32,15 @@ const actions = {
     filterTodos: async({commit},payload) => {
         const response = await axios.get(`https://jsonplaceholder.typicode.com/todos/?_limit=${payload}`)
         commit('FILTER_TODOS',response.data)
+    },
+    onDblClick: async (context,{completed,id,title,userId}) => {
+        const response = await axios.put(`https://jsonplaceholder.typicode.com/todos/${id}`,{
+            title:title,
+            userId:userId,
+            completed:!completed,
+            id:id
+        })
+        context.commit('TOGGLE_COMPLETED_STATUS',response.data)
     }
 };
 
@@ -46,6 +56,13 @@ const mutations = {
     },
     FILTER_TODOS:(state,payload) => {
         state.todos = payload
+    },
+    TOGGLE_COMPLETED_STATUS:(state,payload) => {
+        const index = state.todos.findIndex(todo => todo.id === payload.id)
+        console.log(index);
+        if (index !== -1) {
+            state.todos.splice(index, 1, payload);
+        }
     }
 };
 
