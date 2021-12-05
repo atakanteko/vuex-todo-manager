@@ -27,6 +27,10 @@ const actions = {
     deleteTodo: async (context, payload) => {
         const response = await axios.delete(`https://jsonplaceholder.typicode.com/todos/${payload}`)
         context.commit('DELETE_TODO',payload)
+    },
+    filterTodos: async({commit},payload) => {
+        const response = await axios.get(`https://jsonplaceholder.typicode.com/todos/?_limit=${payload}`)
+        commit('FILTER_TODOS',response.data)
     }
 };
 
@@ -39,6 +43,9 @@ const mutations = {
     },
     DELETE_TODO:(state,payload) => {
         state.todos = state.todos.filter(todo => todo.id !== payload)
+    },
+    FILTER_TODOS:(state,payload) => {
+        state.todos = payload
     }
 };
 
