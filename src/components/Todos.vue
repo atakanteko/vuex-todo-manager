@@ -11,12 +11,20 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
     name:'Todos',
     computed:{
         ...mapGetters(['allTodos'])
+    },
+    methods:{
+        ...mapActions(['fetchTodos'])
+    },
+    created: function(){
+        this.fetchTodos()
     }
+
 }
 </script>
 <style scoped>
