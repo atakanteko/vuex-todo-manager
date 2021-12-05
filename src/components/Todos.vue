@@ -1,12 +1,22 @@
 <template>
     <div>
         <h3>Todos</h3>
+        <ul>
+            <li v-for="(todo,index) in allTodos" :key="index">
+                {{todo.title}}
+            </li>
+        </ul>
     </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-    name:'Todos'
+    name:'Todos',
+    computed:{
+        ...mapGetters(['allTodos'])
+    }
 }
 </script>
 <style scoped>
