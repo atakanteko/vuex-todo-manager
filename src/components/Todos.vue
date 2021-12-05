@@ -2,8 +2,13 @@
     <div>
         <h3>Todos</h3>
         <div class="todos">
-            <div class="todo" v-for="todo in allTodos" :key="todo.id">
+            <div 
+                class="todo" 
+                v-for="todo in allTodos" 
+                :key="todo.id"
+            >
                 {{ todo.title }}
+                <i @click="deleteTodo(todo.id)" class="fas fa-trash-alt"></i>
             </div>
         </div>
     </div>
@@ -19,7 +24,7 @@ export default {
         ...mapGetters(['allTodos'])
     },
     methods:{
-        ...mapActions(['fetchTodos'])
+        ...mapActions(['fetchTodos','deleteTodo']),
     },
     created: function(){
         this.fetchTodos()
